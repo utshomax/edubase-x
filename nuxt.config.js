@@ -16,7 +16,7 @@ export default {
   },
   publicRuntimeConfig: {
     baseUrl:
-      process.env.BASE_URL_DEV || "https://api-edubase.app.madvertlabs.com/",
+      process.env.BASE_URL || "https://edubaseback.herokuapp.com/'",
     underMaintenance: process.env.UNDERMAINTENANCE || false
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -83,7 +83,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: "http://localhost:5000/akb",
+    baseURL: process.env.BASE_URL,
     headers: {
       token: "madvert"
     }
