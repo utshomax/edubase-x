@@ -16,7 +16,7 @@ export default {
   },
   publicRuntimeConfig: {
     baseUrl:
-      process.env.BASE_URL || "https://edubaseback.herokuapp.com/'",
+      process.env.BASE_URL || "https://edubaseback.herokuapp.com/",
     underMaintenance: process.env.UNDERMAINTENANCE || false
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
