@@ -85,9 +85,9 @@ export default {
     return {
       loading: false,
       user: {
-        t_id: "",
-        password: "",
-        pin: ""
+        t_id: "admin",
+        password: "admin",
+        pin: "admin"
       },
       sncText: "",
       snackbar: false
