@@ -88,7 +88,7 @@
       </v-container>
     </v-main>
     <v-footer class="text-caption grey--text font-weight-bold" app>
-      <span>MADVERTLABS &copy; {{ new Date().getFullYear() }}</span>
+      <span><a class="copy" href="https://github.com/utshomax">UTSABUTSHO</a> &copy; {{ new Date().getFullYear() }}</span>
       <v-spacer></v-spacer>
       <span>v 1.2.0</span>
       <span v-show="false">{{ hassms }}</span>
@@ -328,5 +328,8 @@ html::-webkit-scrollbar {
 .main {
   max-height: calc(100vh - 36px);
   overflow: auto;
+}
+.copy{
+  text-decoration: none;
 }
 </style>
