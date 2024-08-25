@@ -106,10 +106,10 @@ export default {
     };
   },
   mounted() {
-    this.user.pin = this.getSubdomain();
+    this.user.pin = this.getEdubasePin();
   },
   methods: {
-    getSubdomain() {
+    getEdubasePin() {
       // Get the current hostname (e.g., 'sub.domain.com')
       const hostname = window.location.hostname;
       // Split the hostname into an array by dots
@@ -117,8 +117,8 @@ export default {
 
       // Check if it's a subdomain (e.g., ['sub', 'domain', 'com'])
       if (parts.length > 2) {
-        // Return the first part as the subdomain
-        return parts[0];
+        // Return the first part as the domain
+        return parts[1];
       } else {
         return ""; // No subdomain
       }
