@@ -30,7 +30,7 @@
                 label="Amount"
                 type="number"
                 required
-                :rules="[v => !!v || 'Amount is required']"
+                :rules="[(v) => !!v || 'Amount is required']"
                 v-model="payment.amount"
               ></v-text-field>
             </v-col>
@@ -40,7 +40,7 @@
                 label="Month"
                 required
                 v-model="payment.month"
-                :rules="[v => !!v || 'Month is required']"
+                :rules="[(v) => !!v || 'Month is required']"
               ></v-select>
             </v-col>
             <v-col cols="12">
@@ -82,7 +82,7 @@ export default {
         amount: "",
         month: "",
         ref: this.$auth.user.id,
-        discount: ""
+        discount: "",
       },
       valid: false,
       months: [
@@ -97,8 +97,9 @@ export default {
         "September",
         "October",
         "November",
-        "December"
-      ]
+        "December",
+        "Others",
+      ],
     };
   },
   props: ["options", "info"],
@@ -109,7 +110,7 @@ export default {
         this.dialog = false;
         this.$emit("success", this.payment);
       }
-    }
-  }
+    },
+  },
 };
 </script>

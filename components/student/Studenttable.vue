@@ -10,7 +10,7 @@
         label="Search"
         solo
         dense
-        style="max-width:300px;"
+        style="max-width: 300px"
         class="mr-3"
         single-line
         hide-details
@@ -41,7 +41,7 @@
                     <v-text-field
                       v-model="editedItem.name"
                       label="Student name"
-                      :rules="[v => !!v || 'Student Name is required']"
+                      :rules="[(v) => !!v || 'Student Name is required']"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
@@ -55,7 +55,7 @@
                       persistent-hint
                       return-object
                       single-line
-                      :rules="[v => !!v || 'Batch Name is required']"
+                      :rules="[(v) => !!v || 'Batch Name is required']"
                     ></v-select>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
@@ -63,12 +63,12 @@
                       v-model.trim="editedItem.phone_no"
                       label="Primary Number"
                       type="number"
-                      :rules="[v => !!v || 'Primary Number is required']"
+                      :rules="[(v) => !!v || 'Primary Number is required']"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field
-                      v-model="editedItem.f_name"
+                      v-model="editedItem.secondary_phone_no"
                       label="Secondary Number (optional)"
                     ></v-text-field>
                   </v-col>
@@ -79,13 +79,13 @@
                     <v-text-field
                       v-model="editedItem.address"
                       label="Address"
-                      :rules="[v => !!v || 'Address Name is required']"
+                      :rules="[(v) => !!v || 'Address Name is required']"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-text-field
-                      v-model="editedItem.m_name"
-                      :rules="[v => !!v || 'School Name is required']"
+                      v-model="editedItem.school_name"
+                      :rules="[(v) => !!v || 'School Name is required']"
                       label="School Name"
                     ></v-text-field>
                   </v-col>
@@ -133,9 +133,7 @@
           </v-icon>
           <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
         </template>
-        <template v-slot:no-data>
-          NO DATA AVILABLE !
-        </template>
+        <template v-slot:no-data> NO DATA AVILABLE ! </template>
       </v-data-table>
     </div>
   </div>
@@ -156,7 +154,7 @@ export default {
       { text: "BATCH", value: "batchname" },
       { text: "PHONE", value: "phone_no" },
       { text: "ADDRESS", value: "address", width: "20%" },
-      { text: "ACTIONS", value: "actions", sortable: false }
+      { text: "ACTIONS", value: "actions", sortable: false },
     ],
     tobeDeleted: null,
     editedIndex: -1,
@@ -167,8 +165,10 @@ export default {
       address: "",
       f_name: "",
       m_name: "",
+      school_name: "",
+      secondary_phone_no: "",
       dob: "",
-      due: 0
+      due: 0,
     },
     defaultItem: {
       name: "",
@@ -177,9 +177,11 @@ export default {
       address: "",
       f_name: "",
       m_name: "",
+      school_name: "",
+      secondary_phone_no: "",
       dob: "",
-      due: 0
-    }
+      due: 0,
+    },
   }),
 
   computed: {
@@ -191,7 +193,7 @@ export default {
     },
     students() {
       return this.$store.state.student.students;
-    }
+    },
   },
 
   watch: {
@@ -207,7 +209,7 @@ export default {
         this.editedItem.batchname = val.name;
         this.editedItem.due = Number(val.fee) + Number(val.admissionfee);
       }
-    }
+    },
   },
 
   methods: {
@@ -251,18 +253,18 @@ export default {
         if (this.editedIndex > -1) {
           const editedObject = {};
           delete Object.assign(editedObject, this.editedItem, {
-            r_id: this.editedItem._id
+            r_id: this.editedItem._id,
           })._id;
           this.$store.dispatch("student/updateStudent", {
             index: this.editedIndex,
-            student: editedObject
+            student: editedObject,
           });
         } else {
           let pin = this.makepin(4);
           let data = {
             ...this.editedItem,
             password: pin,
-            brand: this.$store.state.settings.brand
+            brand: this.$store.state.settings.brand,
           };
           this.$store.dispatch("student/addStudent", data);
         }
@@ -279,8 +281,8 @@ export default {
         );
       }
       return result;
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
