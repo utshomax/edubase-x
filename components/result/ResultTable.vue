@@ -148,17 +148,22 @@ export default {
         x =>
           x.batchid == batchid && x.result.find(y => y.examid == examid) != null
       );
-      let ret = res
-        .map((v, i) => ({
-          id: i,
+      const ret = res
+        .map(v => ({
           roll: v.roll,
           name: v.name,
-          mark: v.result.find(x => x.examid == examid).mark,
-          percent: ""
+          mark: v.result.find(x => x.examid === examid)?.mark || 0,
+          percent: 0,
+          id: 0
         }))
         .map(v => ({
           ...v,
-          percent: `${Math.round((v.mark / this.options.exam.fmark) * 100)} %`
+          percent: Math.round((v.mark / this.options.exam.fmark) * 100)
+        }))
+        .sort((a, b) => b.percent - a.percent)
+        .map((item, index) => ({
+          ...item,
+          id: index + 1,
         }));
       this.displayeditems = ret;
     }
